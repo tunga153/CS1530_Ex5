@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Ex5 {
 	public static int[] sums;
@@ -30,6 +31,8 @@ public class Ex5 {
 			for(Thread t: threads) {
 				t.join();
 			}
+		} catch(Exception e) {
+			System.exit(11);
 		}
 
 		int totalSum = 0;
@@ -39,7 +42,7 @@ public class Ex5 {
 
 		System.out.println("Total: " + numIterations);
 		System.out.println("Total within radius: " + totalSum);
-		double ratio = (((double) totalSum)/((double) numIterations);
+		double ratio = ((double) totalSum)/((double) numIterations);
 		System.out.println("Ratio: " + ratio);
 		System.out.println("PI = " + (ratio * 4)) ;
 
