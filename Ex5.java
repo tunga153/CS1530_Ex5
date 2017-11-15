@@ -5,7 +5,7 @@ public class Ex5 {
 	public static int[] sums;
 	public static void main(String[] args) {
 		int numThreads = -1;
-		int numIterations = -1;	
+		int numIterations = -1;
 
 		try {
 			numThreads = Integer.parseInt(args[0]);
@@ -20,7 +20,7 @@ public class Ex5 {
 		for(int i = 0; i < numThreads; i++ ){
 			final int ithread = i;
 			threads[i] = new Thread(() -> {
-				monteCarlo(ithread, iterationsPerThread);
+				sums[ithread] = monteCarlo(ithread, iterationsPerThread);
 			});
 		}
 		try {
@@ -50,15 +50,17 @@ public class Ex5 {
 
 	}
 
-	public static void monteCarlo(int index, int iterations) {
+	public static int monteCarlo(int index, int iterations) {
 		ThreadLocalRandom r = ThreadLocalRandom.current();
+		int sum = 0;
 		for(int i = 0; i < iterations; i++) {
 			double x = r.nextDouble(1);
 			double y = r.nextDouble(1);
 			if((x*x + y*y) < 1.0) {
-				sums[index]++;
+				sum++;
 			}
 		}
+		return sum;
 	}
 
 
